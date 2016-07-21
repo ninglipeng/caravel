@@ -32,6 +32,7 @@ const initialState = {
   queries: [],
   tables: [],
   workspaceQueries: [],
+  workspaceDatabase: null,
 };
 
 function alterInArr(state, arrKey, obj, alterations, idKey = 'id') {
@@ -97,6 +98,7 @@ function sqlAnvilReducer(state = initialState, action) {
       return removeFromArr(state, 'tables', action.table);
 
     case START_QUERY:
+      var state = addToArr(state, 'queries', action.query);
       return alterInArr(state, 'queryEditors', { id: action.query.sqlEditorId }, { latestQueryId: action.query.id });
 
     case STOP_QUERY:
